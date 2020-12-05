@@ -22,6 +22,13 @@ public class UserActivityRecord {
     @Column(name = "actid")
     int activityID;
 
+    public UserActivityRecord() {}
+
+    public UserActivityRecord(int userID, int activityID) {
+        this.userID = userID;
+        this.activityID = activityID;
+    }
+
     public int getRecordID() {
         return recordID;
     }

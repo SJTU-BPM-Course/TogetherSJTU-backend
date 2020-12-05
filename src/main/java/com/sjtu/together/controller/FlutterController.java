@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -42,6 +41,20 @@ public class FlutterController {
     @GetMapping(value = "/api/isAttended")
     public String isAttended(@RequestParam int userid, @RequestParam int actid) {
         return JSON.toJSONString(recordService.isExisted(userid, actid));
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/api/addRecord")
+    public String addUserActivityRecord(@RequestParam int userid, @RequestParam int actid) {
+        recordService.addUserActivityRecord(userid, actid);
+        return JSON.toJSONString(true);
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/api/removeRecord")
+    public String removeUserActivityRecord(@RequestParam int userid, @RequestParam int actid) {
+        recordService.removeUserActivityRecord(userid, actid);
+        return JSON.toJSONString(true);
     }
 
 }

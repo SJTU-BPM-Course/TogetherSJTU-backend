@@ -10,4 +10,6 @@ public interface UserActivityRecordDAO extends JpaRepository<UserActivityRecord,
     UserActivityRecord findByUserIDAndActivityID(int userID, int activityID);
 
     List<UserActivityRecord> findUserActivityRecordsByUserID(int userID);
+
+    void removeUserActivityRecordByUserIDAndActivityID(int userID, int activityID);
 }

@@ -4,9 +4,11 @@ import com.sjtu.together.dao.UserActivityRecordDAO;
 import com.sjtu.together.entity.UserActivityRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional
 @Service
 public class UserActivityRecordService {
 
@@ -19,5 +21,13 @@ public class UserActivityRecordService {
 
     public List<UserActivityRecord> getRecordsByUserID(int userID) {
         return userActivityRecordDAO.findUserActivityRecordsByUserID(userID);
+    }
+
+    public void addUserActivityRecord(int userid, int actid) {
+        userActivityRecordDAO.save(new UserActivityRecord(userid, actid));
+    }
+
+    public void removeUserActivityRecord(int userID, int activityID) {
+        userActivityRecordDAO.removeUserActivityRecordByUserIDAndActivityID(userID, activityID);
     }
 }
