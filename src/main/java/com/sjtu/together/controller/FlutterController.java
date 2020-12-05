@@ -3,7 +3,8 @@ package com.sjtu.together.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.sjtu.together.entity.Activity;
-import org.apache.xerces.util.SynchronizedSymbolTable;
+import com.sjtu.together.service.UserActivityRecordService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,8 @@ import java.util.List;
 @Controller
 @RestController
 public class FlutterController {
-
+    @Autowired
+    UserActivityRecordService recordService;
 
     @CrossOrigin
     @GetMapping(value = "/api/getUserActivities")
@@ -31,6 +33,12 @@ public class FlutterController {
         activity.setImageURL("https://www.jsr9.com/img/2020/relatedpic/p2558920738.jpg");
         List<Activity> list = Arrays.asList(activity);
         return JSON.toJSONString(list);
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/api/isAttended")
+    public String isAttended(@RequestParam int userid, @RequestParam int actid) {
+        return JSON.toJSONString(recordService.isExisted(userid, actid));
     }
 
 }
