@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Controller
 @RestController
 public class FlutterController {
@@ -26,7 +29,8 @@ public class FlutterController {
         activity.setActivityPlace("陈瑞球楼303A");
         activity.setActivityCreator("王东");
         activity.setImageURL("https://www.jsr9.com/img/2020/relatedpic/p2558920738.jpg");
-        return JSON.toJSONString(activity);
+        List<Activity> list = Arrays.asList(activity);
+        return JSON.toJSONString(list);
     }
 
 }

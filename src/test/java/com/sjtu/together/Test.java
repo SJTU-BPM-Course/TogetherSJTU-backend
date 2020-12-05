@@ -40,7 +40,8 @@ public class Test {
         activity.setActivityPlace("陈瑞球楼303A");
         activity.setActivityCreator("王东");
         activity.setImageURL("https://www.jsr9.com/img/2020/relatedpic/p2558920738.jpg");
-        System.out.println(JSON.toJSONString(activity));
+        List<Activity> list = Arrays.asList(activity);
+        System.out.println(JSON.toJSONString(list));
     }
 
 }
