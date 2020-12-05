@@ -23,7 +23,7 @@ public class LoginController {
     public Result login(@RequestBody User requestUser) {
         String username = requestUser.getUsername();
         username = HtmlUtils.htmlEscape(username);
-
+        System.out.println(username);
         User user = userService.get(username, requestUser.getPassword());
         if (null == user) {
             return new Result(400);
