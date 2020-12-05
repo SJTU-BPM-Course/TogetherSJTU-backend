@@ -34,8 +34,8 @@ public class Activity {
     @Column(name = "actplace")
     String activityPlace;       // 活动地点
 
-    @Column(name = "actcreator")
-    String activityCreator;     // 活动创建者
+    // @Column(name = "actcreator")
+    String activityCreator;     // 活动创建者，数据库中存的是 userid
 
     @Column(name = "actimageurl")
     String imageURL;            // 图片 URL

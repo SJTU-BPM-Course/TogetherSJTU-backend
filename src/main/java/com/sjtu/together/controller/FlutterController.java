@@ -1,6 +1,8 @@
 package com.sjtu.together.controller;
 
 
+import com.alibaba.fastjson.JSON;
+import com.sjtu.together.entity.Activity;
 import org.apache.xerces.util.SynchronizedSymbolTable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,7 +19,14 @@ public class FlutterController {
     @GetMapping(value = "/api/getUserActivities")
     public String getUserActivities(@RequestParam String username) {
         System.out.println(username);
-        return username + " says [Hello world]";
+        Activity activity = new Activity();
+        activity.setActivityID(1);
+        activity.setActivityTitle("物联网体系结构");
+        activity.setActivityDescription("目前物联网架构通常分为感知层、网络层和应用层三个层次。");
+        activity.setActivityPlace("陈瑞球楼303A");
+        activity.setActivityCreator("王东");
+        activity.setImageURL("https://www.jsr9.com/img/2020/relatedpic/p2558920738.jpg");
+        return JSON.toJSONString(activity);
     }
 
 }
