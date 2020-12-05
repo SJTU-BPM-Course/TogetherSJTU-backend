@@ -12,6 +12,7 @@ import org.springframework.web.util.HtmlUtils;
 import java.util.Objects;
 
 @Controller
+@RestController
 public class LoginController {
 
     @Autowired
@@ -30,6 +31,12 @@ public class LoginController {
         } else {
             return new Result(200);
         }
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/api/test")
+    public String test() {
+        return "<h1>Hello world</h1>";
     }
 }
 
