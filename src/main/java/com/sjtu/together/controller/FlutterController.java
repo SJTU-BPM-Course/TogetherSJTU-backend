@@ -26,13 +26,13 @@ public class FlutterController {
     ActivityService activityService;
 
     @CrossOrigin
-    @GetMapping(value = "/api/getAllActivities")
+    @GetMapping(value = "/api/flutter/getAllActivities")
     public String getAllActivities() {
         return JSON.toJSONString(activityService.getAllActivities());
     }
 
     @CrossOrigin
-    @GetMapping(value = "/api/getUserActivities")
+    @GetMapping(value = "/api/flutter/getUserActivities")
     public String getUserActivities(@RequestParam int userid) {
         System.out.println(userid);
         List<Activity> list = new ArrayList<>();
@@ -44,20 +44,20 @@ public class FlutterController {
     }
 
     @CrossOrigin
-    @GetMapping(value = "/api/isAttended")
+    @GetMapping(value = "/api/flutter/isAttended")
     public String isAttended(@RequestParam int userid, @RequestParam int actid) {
         return JSON.toJSONString(recordService.isExisted(userid, actid));
     }
 
     @CrossOrigin
-    @GetMapping(value = "/api/addRecord")
+    @GetMapping(value = "/api/flutter/addRecord")
     public String addUserActivityRecord(@RequestParam int userid, @RequestParam int actid) {
         recordService.addUserActivityRecord(userid, actid);
         return JSON.toJSONString(true);
     }
 
     @CrossOrigin
-    @GetMapping(value = "/api/removeRecord")
+    @GetMapping(value = "/api/flutter/removeRecord")
     public String removeUserActivityRecord(@RequestParam int userid, @RequestParam int actid) {
         recordService.removeUserActivityRecord(userid, actid);
         return JSON.toJSONString(true);
