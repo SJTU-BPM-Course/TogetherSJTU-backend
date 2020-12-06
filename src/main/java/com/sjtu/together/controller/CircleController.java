@@ -18,16 +18,30 @@ public class CircleController {
     CircleService circleService;
 
     @CrossOrigin
-    @GetMapping(value = "/api/addMember")
+    @GetMapping(value = "/api/circle/addMember")
     public String addMember(@RequestParam int cirid, @RequestParam int userid) {
         circleService.addCircleMemeber(cirid, userid);
         return JSON.toJSONString(true);
     }
 
     @CrossOrigin
-    @GetMapping(value = "/api/addActivity")
+    @GetMapping(value = "/api/circle/addActivity")
     public String addActivity(@RequestParam int cirid, @RequestParam int actid) {
         circleService.addCircleActivity(cirid, actid);
+        return JSON.toJSONString(true);
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/api/circle/removeMember")
+    public String removeMember(@RequestParam int cirid, @RequestParam int userid) {
+        circleService.removeCircleMemeber(cirid, userid);
+        return JSON.toJSONString(true);
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/api/circle/removeActivity")
+    public String removeActivity(@RequestParam int cirid, @RequestParam int actid) {
+        circleService.removeCircleActivity(cirid, actid);
         return JSON.toJSONString(true);
     }
 

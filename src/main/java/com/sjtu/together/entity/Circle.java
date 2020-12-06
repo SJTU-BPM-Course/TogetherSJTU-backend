@@ -88,4 +88,16 @@ public class Circle {
         activities.add(activityID);
         circleActivitiesJsonStr = JSON.toJSONString(activities);
     }
+
+    public void removeMember(int userID) {
+        Set<Integer> members = parseSet(circleMembersJsonStr);
+        members.remove(userID);
+        circleMembersJsonStr = JSON.toJSONString(members);
+    }
+
+    public void removeActivity(int activityID) {
+        Set<Integer> activities = parseSet(circleActivitiesJsonStr);
+        activities.remove(activityID);
+        circleActivitiesJsonStr = JSON.toJSONString(activities);
+    }
 }
