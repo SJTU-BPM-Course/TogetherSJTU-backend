@@ -12,14 +12,14 @@ public class UserService {
 
     public boolean isExist(String username) {
         User user = getByName(username);
-        return null!=user;
+        return null != user;
     }
 
     public User getByName(String username) {
         return userDAO.findByUsername(username);
     }
 
-    public User get(String username, String password){
+    public User get(String username, String password) {
         return userDAO.getByUsernameAndPassword(username, password);
     }
 

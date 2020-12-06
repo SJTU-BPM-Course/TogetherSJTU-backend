@@ -4,18 +4,17 @@ import com.alibaba.fastjson.JSON;
 import com.sjtu.together.entity.Activity;
 
 import java.sql.Timestamp;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class Test {
 
     @org.junit.Test
     public void testDeserialize() {
-        List<Integer> list = (List<Integer>) JSON.parse("[1,2,3]");
-        for (Integer x : list) {
-            System.out.println(x);
-        }
+        System.out.println("11" + JSON.parse(""));
+
+        HashSet<Integer> set = new HashSet<>((List<Integer>)JSON.parse("null"));
+        System.out.println(set);
+        System.out.println(JSON.toJSONString(set));
     }
 
     @org.junit.Test
