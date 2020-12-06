@@ -13,5 +13,6 @@
 | FlutterController |    `/api/isAttended`, GET     | `userid, actid` |    返回某个用户是否参加某个活动    |
 | FlutterController |     `/api/addRecord`, GET     | `userid, actid` | 添加用户参加活动的记录（立即报名） |
 | FlutterController |   `/api/removeRecord`, GET    | `userid, actid` | 删除用户参加活动的记录（取消报名） |
+| FlutterController | `/api/getAllActivities`, GET  |     `void`      |            获取所有活动            |
 
 

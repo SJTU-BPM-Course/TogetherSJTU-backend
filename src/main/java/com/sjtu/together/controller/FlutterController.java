@@ -26,6 +26,12 @@ public class FlutterController {
     ActivityService activityService;
 
     @CrossOrigin
+    @GetMapping(value = "/api/getAllActivities")
+    public String getAllActivities() {
+        return JSON.toJSONString(activityService.getAllActivities());
+    }
+
+    @CrossOrigin
     @GetMapping(value = "/api/getUserActivities")
     public String getUserActivities(@RequestParam int userid) {
         System.out.println(userid);

@@ -5,6 +5,8 @@ import com.sjtu.together.entity.Activity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ActivityService {
 
@@ -13,6 +15,10 @@ public class ActivityService {
 
     public Activity getActivityByID(int actid) {
         return activityDAO.findActivityByActivityID(actid);
+    }
+
+    public List<Activity> getAllActivities() {
+        return activityDAO.findAll();
     }
 
 }
