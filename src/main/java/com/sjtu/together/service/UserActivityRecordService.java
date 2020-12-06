@@ -24,7 +24,9 @@ public class UserActivityRecordService {
     }
 
     public void addUserActivityRecord(int userid, int actid) {
-        userActivityRecordDAO.save(new UserActivityRecord(userid, actid));
+        if (userActivityRecordDAO.findByUserIDAndActivityID(userid, actid) == null) {
+            userActivityRecordDAO.save(new UserActivityRecord(userid, actid));
+        }
     }
 
     public void removeUserActivityRecord(int userID, int activityID) {
