@@ -32,7 +32,9 @@ public class Test {
 
     @org.junit.Test
     public void myTest() {
-
+        Activity activity = new Activity();
+        activity.setImageURL("http://");
+        System.out.println(activity);
     }
 
 }

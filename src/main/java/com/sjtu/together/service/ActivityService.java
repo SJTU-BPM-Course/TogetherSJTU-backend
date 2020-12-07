@@ -21,4 +21,8 @@ public class ActivityService {
         return activityDAO.findAll();
     }
 
+    public void addActivity(Activity activity) {
+        activityDAO.save(activity);
+    }
+
 }

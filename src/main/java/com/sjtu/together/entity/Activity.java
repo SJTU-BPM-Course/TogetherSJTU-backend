@@ -1,6 +1,7 @@
 package com.sjtu.together.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -34,13 +35,14 @@ public class Activity {
     @Column(name = "actplace")
     String activityPlace;       // 活动地点
 
-     @Column(name = "actcreator")
+    @Column(name = "actcreator")
     String activityCreator;     // 活动创建者
 
     @Column(name = "actimageurl")
     String imageURL;            // 图片 URL
 
-    public int getActivityID() {return activityID;
+    public int getActivityID() {
+        return activityID;
     }
 
     public void setActivityID(int activityID) {
