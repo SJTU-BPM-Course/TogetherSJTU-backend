@@ -2,6 +2,8 @@ package com.sjtu.together;
 
 import com.alibaba.fastjson.JSON;
 import com.sjtu.together.entity.Activity;
+import com.sjtu.together.entity.QRCodeData;
+import org.springframework.util.DigestUtils;
 
 import java.sql.Timestamp;
 import java.util.*;
@@ -32,9 +34,8 @@ public class Test {
 
     @org.junit.Test
     public void myTest() {
-        Activity activity = new Activity();
-        activity.setImageURL("http://");
-        System.out.println(activity);
+        QRCodeData codeData = new QRCodeData(1);
+        System.out.println(JSON.toJSONString(codeData));
     }
 
 }

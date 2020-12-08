@@ -3,6 +3,7 @@ package com.sjtu.together.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.sjtu.together.entity.Activity;
+import com.sjtu.together.entity.QRCodeData;
 import com.sjtu.together.entity.UserActivityRecord;
 import com.sjtu.together.service.ActivityService;
 import com.sjtu.together.service.UserActivityRecordService;
@@ -69,6 +70,12 @@ public class FlutterController {
     public String removeUserActivityRecord(@RequestParam int userid, @RequestParam int actid) {
         recordService.removeUserActivityRecord(userid, actid);
         return JSON.toJSONString(true);
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "getQRCodeData")
+    public String getQRCodeData(@RequestParam int actid) {
+        return JSON.toJSONString(new QRCodeData(actid));
     }
 
     // TODO: 增加二维码签到的功能，基于 MD5 实现
