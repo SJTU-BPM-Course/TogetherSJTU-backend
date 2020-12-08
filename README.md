@@ -2,14 +2,19 @@
 
 这是基于校园足迹的个人认证系统 (TogetherSJTU) 后端项目。
 
-
 ## API
+
+### LoginController
 
 |     Controller     |                  API                  |      参数       |                             作用                             |
 | :----------------: | :-----------------------------------: | :-------------: | :----------------------------------------------------------: |
 |  LoginController   |           `/api/login`, GET           |     `User`      |                    登录，判断用户名和密码                    |
 |  LoginController   |           `/api/test`, GET            |     `void`      |                     测试，返回一个字符串                     |
-|                    |                                       |                 |                                                              |
+
+### FlutterController
+
+|     Controller     |                  API                  |      参数       |                             作用                             |
+| :----------------: | :-----------------------------------: | :-------------: | :----------------------------------------------------------: |
 | FlutterController  | `/api/flutter/getUserActivities`, GET |    `userid`     |                      返回用户参加的活动                      |
 | FlutterController  | `/api/flutter/getAllActivities`, GET  |     `void`      |                         获取所有活动                         |
 | FlutterController  |    `/api/flutter/isAttended`, GET     | `userid, actid` |                 返回用户是否报名参加某个活动                 |
@@ -17,11 +22,19 @@
 | FlutterController  |      `/api/flutter/signIn`, GET       | `userid, actid` |                       用户在活动中签到                       |
 | FlutterController  |     `/api/flutter/addRecord`, GET     | `userid, actid` |              添加用户参加活动的记录（立即报名）              |
 | FlutterController  |   `/api/flutter/removeRecord`, GET    | `userid, actid` |              删除用户参加活动的记录（取消报名）              |
-|                    |                                       |                 |                                                              |
+
+### ActivityController
+
+|     Controller     |                  API                  |      参数       |                             作用                             |
+| :----------------: | :-----------------------------------: | :-------------: | :----------------------------------------------------------: |
 | ActivityController |  `/api/activity/getQRCodeData`, GET   |     `actid`     | 获得活动签到二维码的 JSON 字符串，格式为：`{"activityID":1, md5:"xxx"}` |
 | ActivityController |       `/api/activity/add`, POST       |   `Activity`    |                           添加活动                           |
 | ActivityController |      `/api/activity/getAll`, GET      |     `void`      |                         获取所有活动                         |
-|                    |                                       |                 |                                                              |
+
+### CircleController
+
+|     Controller     |                  API                  |      参数       |                             作用                             |
+| :----------------: | :-----------------------------------: | :-------------: | :----------------------------------------------------------: |
 |  CircleController  |     `/api/circle/addMember`, GET      | `cirid, userid` |                        圈子内新增用户                        |
 |  CircleController  |    `/api/circle/addActivity`, GET     | `cirid, actid`  |                        圈子内新增活动                        |
 |  CircleController  |    `/api/circle/removeMember`, GET    | `cirid, userid` |                           移除用户                           |
