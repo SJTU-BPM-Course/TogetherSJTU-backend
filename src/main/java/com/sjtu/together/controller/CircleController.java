@@ -3,6 +3,7 @@ package com.sjtu.together.controller;
 import com.alibaba.fastjson.JSON;
 import com.sjtu.together.entity.Circle;
 import com.sjtu.together.service.CircleService;
+import com.sjtu.together.service.UserService;
 import jdk.nashorn.internal.objects.annotations.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,9 @@ public class CircleController {
 
     @Autowired
     CircleService circleService;
+
+    @Autowired
+    UserService userService;
 
     @CrossOrigin
     @GetMapping(value = "addMember")
@@ -48,6 +52,9 @@ public class CircleController {
     @PostMapping(value = "add")
     @ResponseBody
     public String addCircle(@RequestBody Circle circle) {
+        String username = userService.getByUserID(circle.getCircleCreatorID()).getUsername();
+        circle.setCircleCreator(username);
+        circle.addMemeber(circle.getCircleCreatorID());
         circleService.addNewCircle(circle);
         return JSON.toJSONString(true);
     }

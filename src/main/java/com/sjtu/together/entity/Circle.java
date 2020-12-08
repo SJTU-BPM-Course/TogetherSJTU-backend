@@ -1,6 +1,7 @@
 package com.sjtu.together.entity;
 
 import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -23,6 +24,13 @@ public class Circle {
 
     @Column(name = "cirdesc")
     String circleDescription;
+
+    @Column(name = "circreatorid")
+    @JsonAlias(value = {"userid"})
+    int circleCreatorID;
+
+    @Column(name = "circreator")
+    String circleCreator;
 
     @Column(name = "cirmembers")
     String circleMembersJsonStr;
@@ -69,6 +77,22 @@ public class Circle {
 
     public void setCircleActivitiesJsonStr(String circleActivitiesJsonStr) {
         this.circleActivitiesJsonStr = circleActivitiesJsonStr;
+    }
+
+    public String getCircleCreator() {
+        return circleCreator;
+    }
+
+    public void setCircleCreator(String circleCreator) {
+        this.circleCreator = circleCreator;
+    }
+
+    public int getCircleCreatorID() {
+        return circleCreatorID;
+    }
+
+    public void setCircleCreatorID(int circleCreatorID) {
+        this.circleCreatorID = circleCreatorID;
     }
 
     private Set<Integer> parseSet(String jsonStr) {

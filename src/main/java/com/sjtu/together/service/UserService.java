@@ -15,6 +15,10 @@ public class UserService {
         return null != user;
     }
 
+    public User getByUserID(int userID) {
+        return userDAO.findByUserid(userID);
+    }
+
     public User getByName(String username) {
         return userDAO.findByUsername(username);
     }
