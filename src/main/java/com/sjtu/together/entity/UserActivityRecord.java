@@ -16,13 +16,18 @@ public class UserActivityRecord {
     @Column(name = "recid")
     int recordID;
 
+    // 0 表示报名但未签到，1 表示已经签到
+    @Column(name = "recstatus")
+    int recordStatus;
+
     @Column(name = "userid")
     int userID;
 
     @Column(name = "actid")
     int activityID;
 
-    public UserActivityRecord() {}
+    public UserActivityRecord() {
+    }
 
     public UserActivityRecord(int userID, int activityID) {
         this.userID = userID;
@@ -51,5 +56,13 @@ public class UserActivityRecord {
 
     public void setActivityID(int activityID) {
         this.activityID = activityID;
+    }
+
+    public int getRecordStatus() {
+        return recordStatus;
+    }
+
+    public void setRecordStatus(int recordStatus) {
+        this.recordStatus = recordStatus;
     }
 }

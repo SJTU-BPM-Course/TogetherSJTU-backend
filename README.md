@@ -5,15 +5,24 @@
 
 ## API
 
-|    Controller     |                  API                  |      参数       |                作用                |
-| :---------------: | :-----------------------------------: | :-------------: | :--------------------------------: |
-|  LoginController  |           `/api/login`, GET           |     `User`      |       登录，判断用户名和密码       |
-|  LoginController  |           `/api/test`, GET            |     `void`      |        测试，返回一个字符串        |
-| FlutterController | `/api/flutter/getUserActivities`, GET |    `userid`     |         返回用户参加的活动         |
-| FlutterController |    `/api/flutter/isAttended`, GET     | `userid, actid` |    返回某个用户是否参加某个活动    |
-| FlutterController |     `/api/flutter/addRecord`, GET     | `userid, actid` | 添加用户参加活动的记录（立即报名） |
-| FlutterController |   `/api/flutter/removeRecord`, GET    | `userid, actid` | 删除用户参加活动的记录（取消报名） |
-| FlutterController | `/api/flutter/getAllActivities`, GET  |     `void`      |            获取所有活动            |
+|     Controller     |                  API                  |      参数       |                作用                |
+| :----------------: | :-----------------------------------: | :-------------: | :--------------------------------: |
+|  LoginController   |           `/api/login`, GET           |     `User`      |       登录，判断用户名和密码       |
+|  LoginController   |           `/api/test`, GET            |     `void`      |        测试，返回一个字符串        |
+| FlutterController  | `/api/flutter/getUserActivities`, GET |    `userid`     |         返回用户参加的活动         |
+| FlutterController  |    `/api/flutter/isAttended`, GET     | `userid, actid` |    返回用户是否报名参加某个活动    |
+| FlutterController  |    `/api/flutter/isSignedIn`, GET     | `userid, actid` |    返回用户是否在活动中完成签到    |
+| FlutterController  |      `/api/flutter/signIn`, GET       | `userid, actid` |          用户在活动中签到          |
+| FlutterController  |     `/api/flutter/addRecord`, GET     | `userid, actid` | 添加用户参加活动的记录（立即报名） |
+| FlutterController  |   `/api/flutter/removeRecord`, GET    | `userid, actid` | 删除用户参加活动的记录（取消报名） |
+| FlutterController  | `/api/flutter/getAllActivities`, GET  |     `void`      |            获取所有活动            |
+| ActivityController |          `/api/activity/add`          |   `Activity`    |              添加活动              |
+| ActivityController |        `/api/activity/getAll`         |     `void`      |            获取所有活动            |
+|  CircleController  |        `/api/circle/addMember`        | `cirid, userid` |           圈子内新增用户           |
+|  CircleController  |       `/api/circle/addActivity`       | `cirid, actid`  |           圈子内新增活动           |
+|  CircleController  |      `/api/circle/removeMember`       | `cirid, userid` |              移除用户              |
+|  CircleController  |     `/api/circle/removeActivity`      | `cirid, actid`  |              移除活动              |
+|  CircleController  |           `/api/circle/add`           |    `Circle`     |              新增圈子              |
 
 ## POST 请求格式
 
