@@ -2,6 +2,7 @@ package com.sjtu.together.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.sjtu.together.entity.Activity;
+import com.sjtu.together.entity.QRCodeData;
 import com.sjtu.together.entity.User;
 import com.sjtu.together.entity.UserActivityRecord;
 import com.sjtu.together.service.ActivityService;
@@ -50,6 +51,17 @@ public class ActivityController {
     public String addActivity(@RequestBody Activity activity) {
         activityService.addActivity(activity);
         return JSON.toJSONString(true);
+    }
+
+    // 生成二维码 JSON 字符串
+    @CrossOrigin
+    @GetMapping(value = "getQRCodeData")
+    public String getQRCodeData(@RequestParam int actid) {
+        if (activityService.getActivityByID(actid) == null) {
+            return JSON.toJSONString("活动不存在。");
+        } else {
+            return JSON.toJSONString(new QRCodeData(actid));
+        }
     }
 
     @CrossOrigin

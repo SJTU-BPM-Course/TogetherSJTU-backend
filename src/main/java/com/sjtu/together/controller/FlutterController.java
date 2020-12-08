@@ -54,7 +54,10 @@ public class FlutterController {
     @GetMapping(value = "isSignedIn")
     public String isSignedIn(@RequestParam int userid, @RequestParam int actid) {
         UserActivityRecord record = recordService.getRecordByUserIDAndActivityID(userid, actid);
-        boolean result = record.getRecordStatus() == 1 ? true : false;
+        if (record == null) {
+            return JSON.toJSONString("用户还没报名，不能签到。");
+        }
+        boolean result = record.getRecordStatus() == 1;
         return JSON.toJSONString(result);
     }
 
@@ -72,11 +75,6 @@ public class FlutterController {
         return JSON.toJSONString(true);
     }
 
-    @CrossOrigin
-    @GetMapping(value = "getQRCodeData")
-    public String getQRCodeData(@RequestParam int actid) {
-        return JSON.toJSONString(new QRCodeData(actid));
-    }
 
     // TODO: 增加二维码签到的功能，基于 MD5 实现
     @CrossOrigin
