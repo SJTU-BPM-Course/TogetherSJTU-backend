@@ -33,13 +33,14 @@
 
 ### CircleController
 
-|     Controller     |                  API                  |      参数       |                             作用                             |
-| :----------------: | :-----------------------------------: | :-------------: | :----------------------------------------------------------: |
-|  CircleController  |     `/api/circle/addMember`, GET      | `cirid, userid` |                        圈子内新增用户                        |
-|  CircleController  |    `/api/circle/addActivity`, GET     | `cirid, actid`  |                        圈子内新增活动                        |
-|  CircleController  |    `/api/circle/removeMember`, GET    | `cirid, userid` |                           移除用户                           |
-|  CircleController  |   `/api/circle/removeActivity`, GET   | `cirid, actid`  |                           移除活动                           |
-|  CircleController  |        `/api/circle/add`, POST        |    `Circle`     |                           新增圈子                           |
+|    Controller    |                API                |      参数       |        作用        |
+| :--------------: | :-------------------------------: | :-------------: | :----------------: |
+| CircleController |   `/api/circle/addMember`, GET    | `cirid, userid` |   圈子内新增用户   |
+| CircleController |  `/api/circle/addActivity`, GET   | `cirid, actid`  |   圈子内新增活动   |
+| CircleController |  `/api/circle/removeMember`, GET  | `cirid, userid` |      移除用户      |
+| CircleController | `/api/circle/removeActivity`, GET | `cirid, actid`  |      移除活动      |
+| CircleController |      `/api/circle/add`, POST      |    `Circle`     |      新增圈子      |
+| CircleController | `/api/circle/getUserCircles`, GET |    `userid`     | 获取用户加入的圈子 |
 
 ## POST 请求格式
 
