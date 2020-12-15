@@ -50,11 +50,26 @@ CREATE TABLE `circle` (
   `cirmembers` varchar(1024) DEFAULT NULL,
   `ciractivities` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`cirid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 /*Data for the table `circle` */
 
-insert  into `circle`(`cirid`,`cirname`,`cirdesc`,`circreatorid`,`circreator`,`cirmembers`,`ciractivities`) values (0000000001,'肥宅艺术家','肥宅们的快乐基地',2,'冼健邦','[1,2,3]','[1]'),(0000000002,'一颗赛艇协会','一颗赛艇，是一种网络用语，为英文exciting的谐音，常用来形容令人兴奋和激动的事件或情形。',2,'冼健邦','[2]','[2]'),(0000000003,'快乐摸鱼人','摸鱼人的快乐源泉',3,'黄子昂','[3]',NULL);
+insert  into `circle`(`cirid`,`cirname`,`cirdesc`,`circreatorid`,`circreator`,`cirmembers`,`ciractivities`) values (0000000001,'肥宅艺术家','肥宅们的快乐基地',2,'冼健邦','[1,2,3]','[1,2]'),(0000000002,'一颗赛艇协会','一颗赛艇，是一种网络用语，为英文exciting的谐音，常用来形容令人兴奋和激动的事件或情形。',2,'冼健邦','[2]','[2]'),(0000000003,'快乐摸鱼人','摸鱼人的快乐源泉',3,'黄子昂','[3]','[]');
+
+/*Table structure for table `record_circle_activity` */
+
+DROP TABLE IF EXISTS `record_circle_activity`;
+
+CREATE TABLE `record_circle_activity` (
+  `recid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `cirid` int(11) NOT NULL,
+  `actid` int(11) NOT NULL,
+  PRIMARY KEY (`recid`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+/*Data for the table `record_circle_activity` */
+
+insert  into `record_circle_activity`(`recid`,`cirid`,`actid`) values (1,1,1),(2,1,2),(3,2,2);
 
 /*Table structure for table `record_user_activity` */
 
@@ -71,6 +86,21 @@ CREATE TABLE `record_user_activity` (
 /*Data for the table `record_user_activity` */
 
 insert  into `record_user_activity`(`recid`,`recstatus`,`userid`,`actid`) values (0000000001,0000000001,2,1),(0000000004,0000000000,2,3);
+
+/*Table structure for table `record_user_circle` */
+
+DROP TABLE IF EXISTS `record_user_circle`;
+
+CREATE TABLE `record_user_circle` (
+  `recid` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `cirid` int(11) DEFAULT NULL,
+  `userid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`recid`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+/*Data for the table `record_user_circle` */
+
+insert  into `record_user_circle`(`recid`,`cirid`,`userid`) values (0000000002,1,2),(0000000003,1,3),(0000000004,2,2),(0000000005,3,3),(0000000006,1,1);
 
 /*Table structure for table `user` */
 
