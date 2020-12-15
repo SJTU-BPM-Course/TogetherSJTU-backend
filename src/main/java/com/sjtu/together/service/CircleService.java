@@ -37,8 +37,9 @@ public class CircleService {
         circleDAO.save(circle);
     }
 
-    public void addNewCircle(Circle circle) {
-        circleDAO.save(circle);
+    public int addNewCircle(Circle circle) {
+        circleDAO.saveAndFlush(circle);
+        return circle.getCircleID();
     }
 
 

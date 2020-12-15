@@ -75,7 +75,13 @@ public class CircleController {
         String username = userService.getByUserID(circle.getCircleCreatorID()).getUsername();
         circle.setCircleCreator(username);
         circle.addMemeber(circle.getCircleCreatorID());
-        circleService.addNewCircle(circle);
+        int circleID = circleService.addNewCircle(circle);
+
+        int creatorID = circle.getCircleCreatorID();
+        // 在 record_user_circle 表添加 (cirid, userid)
+
+        userCircleRecordService.addUserCircleRecord(creatorID, circleID);
+
         return JSON.toJSONString(true);
     }
 
