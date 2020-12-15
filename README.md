@@ -41,6 +41,7 @@
 | CircleController | `/api/circle/removeActivity`, GET | `cirid, actid`  |      移除活动      |
 | CircleController |      `/api/circle/add`, POST      |    `Circle`     |      新增圈子      |
 | CircleController | `/api/circle/getUserCircles`, GET |    `userid`     | 获取用户加入的圈子 |
+| CircleController | `/api/circle/getActivities`, GET  |     `cirid`     |  获取圈子内的活动  |
 
 ## POST 请求格式
 

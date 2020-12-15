@@ -1,8 +1,11 @@
 package com.sjtu.together.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.sjtu.together.entity.Activity;
 import com.sjtu.together.entity.Circle;
 import com.sjtu.together.entity.UserCircleRecord;
+import com.sjtu.together.service.ActivityService;
 import com.sjtu.together.service.CircleService;
 import com.sjtu.together.service.UserCircleRecordService;
 import com.sjtu.together.service.UserService;
@@ -23,6 +26,9 @@ public class CircleController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    ActivityService activityService;
 
     @Autowired
     UserCircleRecordService recordService;
@@ -72,13 +78,28 @@ public class CircleController {
 
     @CrossOrigin
     @GetMapping(value = "getUserCircles")
-    public String getAllCircles(@RequestParam int userid) {
+    public String getUserCircles(@RequestParam int userid) {
         List<UserCircleRecord> records = recordService.getCirclesByUserID(userid);
         List<Circle> circles = new ArrayList<>();
         for (UserCircleRecord record : records) {
             circles.add(circleService.getCircleByID(record.getCircleID()));
         }
         return JSON.toJSONString(circles);
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "getActivities")
+    public String getActivities(@RequestParam int cirid) {
+        Circle circle = circleService.getCircleByID(cirid);
+        List<Integer> listID = (List<Integer>) JSON.parse(circle.getCircleActivitiesJsonStr());
+        if (listID == null) {
+            listID = new ArrayList<>();
+        }
+        List<Activity> activities = new ArrayList<>();
+        for (int id : listID) {
+            activities.add(activityService.getActivityByID(id));
+        }
+        return JSON.toJSONString(activities);
     }
 
 
