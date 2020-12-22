@@ -6,10 +6,14 @@ import com.sjtu.together.entity.QRCodeData;
 import com.sjtu.together.entity.User;
 import com.sjtu.together.entity.UserActivityRecord;
 import com.sjtu.together.service.ActivityService;
+import com.sjtu.together.utils.HttpRequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 
 @Controller
@@ -48,8 +52,20 @@ public class ActivityController {
     @CrossOrigin
     @PostMapping(path = "add")
     @ResponseBody
-    public String addActivity(@RequestBody Activity activity) {
-        activityService.addActivity(activity);
+    public String addActivity(@RequestBody Activity activity) throws UnsupportedEncodingException {
+        System.out.println(JSON.toJSONString(activity));
+        List<Activity> conflicts = activityService.isActivityConflict(activity);
+        if (conflicts.size() == 0) {
+            activityService.addActivity(activity);
+        } else {
+            String url = "http://47.103.222.155:3000/sendWeb";
+            String str = URLEncoder.encode("有新的活动冲突待处理", "utf8");
+            String name = URLEncoder.encode("Zhang Xueyou", "utf8");
+            String params = "str=" + str + "&name=" + name;
+            String result = HttpRequestUtil.sendGet(url, params);
+            System.out.println("Activity conflict，get request ret = " + result);
+            return JSON.toJSONString(conflicts);
+        }
         return JSON.toJSONString(true);
     }
 

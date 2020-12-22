@@ -5,6 +5,9 @@ import com.sjtu.together.entity.Activity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,6 +26,22 @@ public class ActivityService {
 
     public void addActivity(Activity activity) {
         activityDAO.save(activity);
+    }
+
+    public List<Activity> isActivityConflict(Activity activity) {
+        ArrayList<Activity> conflicts = new ArrayList<>();
+        List<Activity> list = activityDAO.findByActivityPlaceLike("%" + activity.getActivityPlace() + '%');
+        Timestamp s1 = activity.getStartTime();
+        Timestamp e1 = activity.getEndTime();
+        for (Activity x : list) {
+            Timestamp s2 = x.getStartTime();
+            Timestamp e2 = x.getEndTime();
+            if (((e1.equals(s2) || e1.after(s2)) && (e1.equals(e2) || e1.before(e2))) ||
+                ((s1.equals(s2) || s1.after(s2)) && (s1.equals(e2) || s1.before(e2)))) {
+                conflicts.add(x);
+            }
+        }
+        return conflicts;
     }
 
 }
