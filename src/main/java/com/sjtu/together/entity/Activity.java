@@ -41,6 +41,17 @@ public class Activity {
     @Column(name = "actimageurl")
     String imageURL;            // 图片 URL
 
+    @Column(name = "actstatus")
+    String activityStatus;      // 活动是否被教务处审核
+
+    public String getActivityStatus() {
+        return activityStatus;
+    }
+
+    public void setActivityStatus(String activityStatus) {
+        this.activityStatus = activityStatus;
+    }
+
     public int getActivityID() {
         return activityID;
     }
