@@ -42,13 +42,13 @@ public class Activity {
     String imageURL;            // 图片 URL
 
     @Column(name = "actstatus")
-    String activityStatus;      // 活动是否被教务处审核
+    int activityStatus;      // 活动是否被教务处审核
 
-    public String getActivityStatus() {
+    public int getActivityStatus() {
         return activityStatus;
     }
 
-    public void setActivityStatus(String activityStatus) {
+    public void setActivityStatus(int activityStatus) {
         this.activityStatus = activityStatus;
     }
 

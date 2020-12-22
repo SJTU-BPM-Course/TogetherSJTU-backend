@@ -16,6 +16,10 @@ public class ActivityService {
     @Autowired
     ActivityDAO activityDAO;
 
+    public List<Activity> getAllUnreviewed() {
+        return activityDAO.findAllByActivityStatus(0);
+    }
+
     public Activity getActivityByID(int actid) {
         return activityDAO.findActivityByActivityID(actid);
     }
@@ -37,11 +41,20 @@ public class ActivityService {
             Timestamp s2 = x.getStartTime();
             Timestamp e2 = x.getEndTime();
             if (((e1.equals(s2) || e1.after(s2)) && (e1.equals(e2) || e1.before(e2))) ||
-                ((s1.equals(s2) || s1.after(s2)) && (s1.equals(e2) || s1.before(e2)))) {
+                    ((s1.equals(s2) || s1.after(s2)) && (s1.equals(e2) || s1.before(e2)))) {
                 conflicts.add(x);
             }
         }
         return conflicts;
     }
 
+    public boolean setReviewStatus(int actid, int status) {
+        Activity activity = getActivityByID(actid);
+        if (activity != null) {
+            activity.setActivityStatus(status);
+            activityDAO.save(activity);
+            return true;
+        } else
+            return false;
+    }
 }

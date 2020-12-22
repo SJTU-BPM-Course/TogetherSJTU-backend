@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -67,6 +68,26 @@ public class ActivityController {
             return JSON.toJSONString(conflicts);
         }
         return JSON.toJSONString(true);
+    }
+
+    @CrossOrigin
+    @PostMapping(path = "getConflicts")
+    @ResponseBody
+    public String checkConflict(@RequestBody Activity activity) {
+        List<Activity> conflicts = activityService.isActivityConflict(activity);
+        return JSON.toJSONString(conflicts);
+    }
+
+    @CrossOrigin
+    @GetMapping(path = "getUnreviewed")
+    public String getUnreviewed() {
+        return JSON.toJSONString(activityService.getAllUnreviewed());
+    }
+
+    @CrossOrigin
+    @GetMapping(path = "setReviewStatus")
+    public String setReviewStatus(int actid, int status) {
+        return JSON.toJSONString(activityService.setReviewStatus(actid, status));
     }
 
     // 生成二维码 JSON 字符串
