@@ -1,11 +1,10 @@
 package com.sjtu.together.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.sjtu.together.entity.Activity;
-import com.sjtu.together.entity.QRCodeData;
-import com.sjtu.together.entity.User;
-import com.sjtu.together.entity.UserActivityRecord;
+import com.sjtu.together.entity.*;
+import com.sjtu.together.global.ActivityStatus;
 import com.sjtu.together.service.ActivityService;
+import com.sjtu.together.service.FeedbackService;
 import com.sjtu.together.utils.HttpRequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +23,9 @@ public class ActivityController {
 
     @Autowired
     ActivityService activityService;
+
+    @Autowired
+    FeedbackService feedbackService;
 
     // TODO: 完成活动的增删改查
 
@@ -88,6 +90,21 @@ public class ActivityController {
     @GetMapping(path = "setReviewStatus")
     public String setReviewStatus(int actid, int status) {
         return JSON.toJSONString(activityService.setReviewStatus(actid, status));
+    }
+
+    @CrossOrigin
+    @PostMapping(path = "reject")
+    @ResponseBody
+    public String rejectActivity(@RequestBody Feedback feedback) {
+        int actid = feedback.getActivityID();
+        if (activityService.getActivityByID(actid) != null) {
+            activityService.setReviewStatus(actid, ActivityStatus.Rejected);
+            feedbackService.addFeedbackRecord(feedback);
+            return JSON.toJSONString(true);
+        } else {
+            // 活动不存在
+            return JSON.toJSONString(false);
+        }
     }
 
     // 生成二维码 JSON 字符串

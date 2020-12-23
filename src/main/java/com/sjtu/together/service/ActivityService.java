@@ -2,6 +2,7 @@ package com.sjtu.together.service;
 
 import com.sjtu.together.dao.ActivityDAO;
 import com.sjtu.together.entity.Activity;
+import com.sjtu.together.global.ActivityStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class ActivityService {
     ActivityDAO activityDAO;
 
     public List<Activity> getAllUnreviewed() {
-        return activityDAO.findAllByActivityStatus(0);
+        return activityDAO.findAllByActivityStatus(ActivityStatus.Pending);
     }
 
     public Activity getActivityByID(int actid) {
