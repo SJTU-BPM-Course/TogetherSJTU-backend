@@ -42,7 +42,18 @@ public class Activity {
     String imageURL;            // 图片 URL
 
     @Column(name = "actstatus")
-    int activityStatus;      // 活动是否被教务处审核
+    int activityStatus;         // 活动是否被教务处审核
+
+    @Column(name = "actcollege")
+    String activityCollege;     // 相关学院
+
+    public String getActivityCollege() {
+        return activityCollege;
+    }
+
+    public void setActivityCollege(String activityCollege) {
+        this.activityCollege = activityCollege;
+    }
 
     public int getActivityStatus() {
         return activityStatus;
