@@ -21,6 +21,11 @@ public class ActivityService {
         return activityDAO.findAllByActivityStatus(ActivityStatus.Pending);
     }
 
+    public List<Activity> getAllByStatus(int status) {
+        return activityDAO.findAllByActivityStatus(status);
+    }
+
+
     public Activity getActivityByID(int actid) {
         return activityDAO.findActivityByActivityID(actid);
     }

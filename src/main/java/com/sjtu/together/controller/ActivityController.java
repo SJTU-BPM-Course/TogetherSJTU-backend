@@ -72,13 +72,6 @@ public class ActivityController {
         return JSON.toJSONString(true);
     }
 
-    @CrossOrigin
-    @PostMapping(path = "getConflicts")
-    @ResponseBody
-    public String checkConflict(@RequestBody Activity activity) {
-        List<Activity> conflicts = activityService.isActivityConflict(activity);
-        return JSON.toJSONString(conflicts);
-    }
 
     @CrossOrigin
     @GetMapping(path = "getUnreviewed")
@@ -122,5 +115,13 @@ public class ActivityController {
     @GetMapping(path = "getAll")
     public String getAllActivities() {
         return JSON.toJSONString(activityService.getAllActivities());
+    }
+
+    // 为了演示冲突功能
+    // 设定了 2 组冲突，status 设置为 -100, -200
+    @CrossOrigin
+    @GetMapping(path = "getByStatus")
+    public String getByStatus(@RequestParam int status) {
+        return JSON.toJSONString(activityService.getAllByStatus(status));
     }
 }
