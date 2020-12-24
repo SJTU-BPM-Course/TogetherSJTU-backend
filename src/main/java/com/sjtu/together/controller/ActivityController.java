@@ -72,6 +72,23 @@ public class ActivityController {
         return JSON.toJSONString(true);
     }
 
+    @CrossOrigin
+    @PostMapping(path = "update")
+    @ResponseBody
+    public String updateActivity(@RequestBody Activity activity) {
+        System.out.println(JSON.toJSONString(activity));
+        activity.setActivityStatus(ActivityStatus.Pending);
+        activityService.addActivity(activity);
+        return JSON.toJSONString(true);
+    }
+
+    @CrossOrigin
+    @GetMapping(path = "delete")
+    public String deleteActivity(@RequestParam int actid) {
+        activityService.deleteActivityByID(actid);
+        return JSON.toJSONString(true);
+    }
+
 
     @CrossOrigin
     @GetMapping(path = "getUnreviewed")

@@ -4,7 +4,11 @@ import com.sjtu.together.dao.FeedbackDAO;
 import com.sjtu.together.entity.Feedback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
+@Transactional
 @Service
 public class FeedbackService {
     @Autowired
@@ -19,5 +23,13 @@ public class FeedbackService {
 
     public void addFeedbackRecord(Feedback feedback) {
         feedbackDAO.save(feedback);
+    }
+
+    public List<Feedback> getAllFeedbacks() {
+        return feedbackDAO.findAll();
+    }
+
+    public void deleteFeedback(int feedbackID) {
+        feedbackDAO.deleteByFeedbackID(feedbackID);
     }
 }

@@ -11,4 +11,6 @@ public interface ActivityDAO extends JpaRepository<Activity, Integer> {
     List<Activity> findByActivityPlaceLike(String activityPlace);
 
     List<Activity> findAllByActivityStatus(int status);
+
+    void deleteByActivityID(int actid);
 }
