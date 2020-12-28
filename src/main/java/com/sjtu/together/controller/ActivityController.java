@@ -5,6 +5,7 @@ import com.sjtu.together.entity.*;
 import com.sjtu.together.global.ActivityStatus;
 import com.sjtu.together.service.ActivityService;
 import com.sjtu.together.service.FeedbackService;
+import com.sjtu.together.service.UserActivityRecordService;
 import com.sjtu.together.utils.HttpRequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,10 @@ public class ActivityController {
 
     @Autowired
     FeedbackService feedbackService;
+
+    @Autowired
+    UserActivityRecordService userActivityService;
+
 
     // TODO: 完成活动的增删改查
 
@@ -58,9 +63,16 @@ public class ActivityController {
     public String addActivity(@RequestBody Activity activity) throws UnsupportedEncodingException {
         System.out.println(JSON.toJSONString(activity));
         List<Activity> conflicts = activityService.isActivityConflict(activity);
-        if (conflicts.size() == 0) {
-            activityService.addActivity(activity);
-        } else {
+
+        int actid = activityService.addActivity(activity);
+        userActivityService.addUserActivityRecord(4, actid);
+
+        activityService.setReviewStatus(actid, -100);
+        for (Activity x : conflicts) {
+            activityService.setReviewStatus(x.getActivityID(), -100);
+        }
+
+        if (conflicts.size() != 0) {
             String url = "http://47.103.222.155:3000/sendWeb";
             String str = URLEncoder.encode("有新的活动冲突待处理", "utf8");
             String name = URLEncoder.encode("Zhang Xueyou", "utf8");

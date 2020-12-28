@@ -36,8 +36,9 @@ public class ActivityService {
         return activityDAO.findAll();
     }
 
-    public void addActivity(Activity activity) {
-        activityDAO.save(activity);
+    public int addActivity(Activity activity) {
+        activityDAO.saveAndFlush(activity);
+        return activity.getActivityID();
     }
 
     public List<Activity> isActivityConflict(Activity activity) {
@@ -46,10 +47,8 @@ public class ActivityService {
         Timestamp s1 = activity.getStartTime();
         Timestamp e1 = activity.getEndTime();
         for (Activity x : list) {
-            Timestamp s2 = x.getStartTime();
-            Timestamp e2 = x.getEndTime();
-            if (((e1.equals(s2) || e1.after(s2)) && (e1.equals(e2) || e1.before(e2))) ||
-                    ((s1.equals(s2) || s1.after(s2)) && (s1.equals(e2) || s1.before(e2)))) {
+            Timestamp s2 = x.getStartTime(), e2 = x.getEndTime();
+            if ((s1.after(s2) && s1.before(e2)) || (e1.after(s2) && e1.before(e2)) || (s1.before(s2) && e1.after(e2))) {
                 conflicts.add(x);
             }
         }
